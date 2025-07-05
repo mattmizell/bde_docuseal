@@ -1,0 +1,8 @@
+# Correct DocuSeal deployment for Render
+FROM docuseal/docuseal:latest
+
+# The base image already has everything configured
+# Just set our environment variables and expose the port
+EXPOSE 3000
+
+# The base image handles the startup automatically

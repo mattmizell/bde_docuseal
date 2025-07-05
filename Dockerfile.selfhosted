@@ -1,0 +1,15 @@
+# Self-hosted DocuSeal on Render
+FROM docuseal/docuseal:latest
+
+# Set production environment
+ENV RAILS_ENV=production
+ENV FORCE_SSL=true
+
+# Create data directory
+RUN mkdir -p /data
+
+# Expose port 3000 (DocuSeal default)
+EXPOSE 3000
+
+# Use DocuSeal's built-in startup script
+CMD ["rails", "server", "-b", "0.0.0.0", "-p", "3000"]

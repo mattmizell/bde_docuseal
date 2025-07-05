@@ -1,0 +1,27 @@
+services:
+  # PostgreSQL database for DocuSeal
+  - type: pgsql
+    name: bde-docuseal-db
+    plan: free
+    databaseName: docuseal_production
+    user: docuseal_user
+
+  # Self-hosted DocuSeal application  
+  - type: web
+    name: bde-docuseal-selfhosted
+    env: docker
+    plan: starter  # $7/month for Docker support
+    dockerfilePath: ./Dockerfile.selfhosted
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: bde-docuseal-db
+          property: connectionString
+      - key: SECRET_KEY_BASE
+        generateValue: true
+      - key: RAILS_ENV
+        value: production
+      - key: FORCE_SSL
+        value: "true"
+      - key: PORT
+        value: "3000"

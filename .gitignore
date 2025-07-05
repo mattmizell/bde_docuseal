@@ -54,3 +54,11 @@ htmlcov/
 # Temporary files
 *.tmp
 *.temp
+
+# Secrets and credentials
+Git_Token_Claude.txt
+DATABASE_CREDENTIALS.txt
+*token*
+*secret*
+*credential*
+*password*

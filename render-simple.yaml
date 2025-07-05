@@ -1,0 +1,26 @@
+services:
+  # Self-hosted DocuSeal using direct Docker image
+  - type: web
+    name: bde-docuseal-simple
+    env: docker
+    plan: starter
+    dockerCommand: |
+      docker run --name docuseal \
+        -p 3000:3000 \
+        -e DATABASE_URL="$DATABASE_URL" \
+        -e SECRET_KEY_BASE="$SECRET_KEY_BASE" \
+        -e RAILS_ENV=production \
+        -e FORCE_SSL=true \
+        -v /opt/render/project/data:/data \
+        docuseal/docuseal:latest
+    envVars:
+      - key: DATABASE_URL
+        value: postgresql://docuseal_user:Xsp8yksEJocqoqw2ORHsQkOarPuIftDp@dpg-d1ki3a6r433s73ck9900-a/docuseal_production
+      - key: SECRET_KEY_BASE
+        value: 8f188f4b3a48358943f562de1727de29
+      - key: RAILS_ENV
+        value: production
+      - key: FORCE_SSL
+        value: "true"
+      - key: PORT
+        value: "3000"

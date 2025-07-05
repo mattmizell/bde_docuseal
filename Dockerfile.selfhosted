@@ -5,11 +5,11 @@ FROM docuseal/docuseal:latest
 ENV RAILS_ENV=production
 ENV FORCE_SSL=true
 
-# Create data directory
-RUN mkdir -p /data
+# Create data directory for file storage
+VOLUME ["/data"]
 
 # Expose port 3000 (DocuSeal default)
 EXPOSE 3000
 
-# Use DocuSeal's built-in startup script
-CMD ["rails", "server", "-b", "0.0.0.0", "-p", "3000"]
+# Use the default CMD from DocuSeal image (don't override)
+# The base image already has the correct startup command
